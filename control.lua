@@ -1,13 +1,13 @@
 local zLib = require("lib.zLib")
 
 function OnDestroyed(e)
-	if(e.entity) then
-		local entity = e.entity
-		local triggers = { locomotive = true, car = true }
-		if triggers[e.entity.type] then
-			zLib.createNuclearExplosion(entity)
-		end
-	end
+    if(e.entity) then
+        local entity = e.entity
+        local triggers = { locomotive = true, car = true }
+        if triggers[e.entity.type] then
+            zLib.createNuclearExplosion(entity)
+        end
+    end
 end
 
 -- trigger meltdown
