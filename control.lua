@@ -1,11 +1,11 @@
-local zLib = require("lib.zLib")
+local zetaLib = require("lib.zetaLib")
 
 function OnDestroyed(e)
     if(e.entity) then
         local entity = e.entity
         local triggers = { locomotive = true, car = true }
         if triggers[e.entity.type] then
-            zLib.createNuclearExplosion(entity)
+            zetaLib.createNuclearExplosion(entity)
         end
     end
 end

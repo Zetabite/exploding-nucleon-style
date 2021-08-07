@@ -1,4 +1,4 @@
-local zLib = require("lib.zLib")
+local zetaLib = require("lib.zetaLib")
 
-zLib.setNuclearExplosion("car")
-zLib.setNuclearExplosion("locomotive")
+zetaLib.setNuclearExplosion("car")
+zetaLib.setNuclearExplosion("locomotive")
