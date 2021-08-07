@@ -1,7 +1,7 @@
 local nuclear_fuels = require("lib.nuclear-fuels")
-local zLib = {}
+local zetaLib = {}
 
-function zLib.isNuclearEnergy(burner)
+function zetaLib.isNuclearEnergy(burner)
     if (burner.fuel_categories) then
         return burner.fuel_categories["nuclear"]
     elseif (burner.fuel_category) then
@@ -10,24 +10,24 @@ function zLib.isNuclearEnergy(burner)
     return false
 end
 
-function zLib.entityHasNuclearBurner(entity)
+function zetaLib.entityHasNuclearBurner(entity)
     if (entity.burner) then
-        return zLib.isNuclearEnergy(entity.burner)
+        return zetaLib.isNuclearEnergy(entity.burner)
     elseif (entity.energy_source) then
-        return zLib.isNuclearEnergy(entity.energy_source)
+        return zetaLib.isNuclearEnergy(entity.energy_source)
     end
 end
 
-function zLib.setNuclearExplosion(prototype)
+function zetaLib.setNuclearExplosion(prototype)
     for entry, _ in pairs(data.raw[prototype]) do
         local entity = data.raw[prototype][entry]
-        if zLib.entityHasNuclearBurner(entity) then
+        if zetaLib.entityHasNuclearBurner(entity) then
             entity.dying_explosion = "nuclear-reactor-explosion"
         end
     end
 end
 
-function zLib.fuelIsNuclear(fuel)
+function zetaLib.fuelIsNuclear(fuel)
     if (fuel) then
         for _, value in pairs(nuclear_fuels) do
             if string.match(fuel.name, value) then
@@ -38,17 +38,17 @@ function zLib.fuelIsNuclear(fuel)
     return false
 end
 
-function zLib.spawnNuclearExplosion(entity)
+function zetaLib.spawnNuclearExplosion(entity)
     local surface = entity.surface
     local pos = entity.position
     surface.request_to_generate_chunks(pos, 4)
     surface.create_entity{ name = "atomic-rocket", position = pos, target = entity , force = "neutral", speed = 0.5 }
 end
 
-function zLib.createNuclearExplosion(entity)
-    if zLib.fuelIsNuclear(entity.burner.currently_burning) then
-        zLib.spawnNuclearExplosion(entity)
+function zetaLib.createNuclearExplosion(entity)
+    if zetaLib.fuelIsNuclear(entity.burner.currently_burning) then
+        zetaLib.spawnNuclearExplosion(entity)
     end
 end
 
-return zLib
+return zetaLib
